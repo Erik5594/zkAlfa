@@ -12,6 +12,10 @@ public class NotaFiscal {
 	private int id;
 	private double i;
 	private double vb;
+	
+	public NotaFiscal() {
+		super();
+	}
 
 	public NotaFiscal(double i, double vb) {
 		this.i = i;
