@@ -1,5 +1,6 @@
 package br.com.diego.nf;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,16 +11,18 @@ public class NotaFiscal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private double i;
-	private double vb;
+	@Column(name="valor_imposto")
+	private double valorImposto;
+	@Column(name="valor_bruto")
+	private double valorBruto;
 	
 	public NotaFiscal() {
 		super();
 	}
 
-	public NotaFiscal(double i, double vb) {
-		this.i = i;
-		this.vb = vb;
+	public NotaFiscal(double valorImposto, double valorBruto) {
+		this.valorImposto = valorImposto;
+		this.valorBruto = valorBruto;
 	}
 
 	public int getId() {
@@ -30,20 +33,20 @@ public class NotaFiscal {
 		this.id = id;
 	}
 
-	public double getI() {
-		return i;
+	public double getValorImposto() {
+		return valorImposto;
 	}
 
-	public void setI(double i) {
-		this.i = i;
+	public void setValorImposto(double valorImposto) {
+		this.valorImposto = valorImposto;
 	}
 
-	public double getVb() {
-		return vb;
+	public double getValorBruto() {
+		return valorBruto;
 	}
 
-	public void setVb(double vb) {
-		this.vb = vb;
+	public void setValorBruto(double valorBruto) {
+		this.valorBruto = valorBruto;
 	}
 
 }

@@ -5,7 +5,7 @@
 	<artifactId>nf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<zk.version>8.0.2.2</zk.version>
+		<zk.version>7.0.3</zk.version>
 		<commons-io>2.4</commons-io>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
@@ -58,11 +58,16 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.1.9.Final</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql 
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1212</version>
+		</dependency>-->
+		<dependency>
+    		<groupId>org.postgresql</groupId>
+    		<artifactId>postgresql</artifactId>
+    		<version>9.3-1102-jdbc41</version>
 		</dependency>
 
 		<dependency>

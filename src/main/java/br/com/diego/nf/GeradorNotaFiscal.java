@@ -14,15 +14,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class GeradorNotaFiscal {
-	public void geraNota(Fatura f, Imposto imposto) {
-		NotaFiscal notaFiscal = geraNotaFiscal(f, imposto);
+	public void geraNota(Fatura fatura, Imposto imposto) {
+		NotaFiscal notaFiscal = geraNotaFiscal(fatura, imposto);
 		armazenarNoBanco(notaFiscal);
-		enviarEmail(f);
+		enviarEmail(fatura);
 	}
 
-	private void enviarEmail(Fatura f) {
-		final String username = "refatoracaoalfa2017@gmail.com";
-		final String password = "refatoracao123";
+	private void enviarEmail(Fatura fatura) {
+		final String usuario = "refatoracaoalfa2017@gmail.com";
+		final String senha = "refatoracao123";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -32,7 +32,7 @@ public class GeradorNotaFiscal {
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
+				return new PasswordAuthentication(usuario, senha);
 			}
 		});
 
@@ -40,7 +40,7 @@ public class GeradorNotaFiscal {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("refatoracaoalfa2017@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("diegoamericoguedes@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("erik.derick74@gmail.com"));
 			message.setSubject("Titulo");
 			message.setText("Mensagem");
 
@@ -64,12 +64,12 @@ public class GeradorNotaFiscal {
 		em.close();
 	}
 
-	private NotaFiscal geraNotaFiscal(Fatura f, Imposto imposto) {
+	private NotaFiscal geraNotaFiscal(Fatura fatura, Imposto imposto) {
 		double valorImposto = 0;
 
-		valorImposto = imposto.getValor(f.getV());
+		valorImposto = imposto.getValor(fatura.getValor());
 
-		NotaFiscal notaFiscal = new NotaFiscal(valorImposto, f.getV());
+		NotaFiscal notaFiscal = new NotaFiscal(valorImposto, fatura.getValor());
 		return notaFiscal;
 	}
 }
