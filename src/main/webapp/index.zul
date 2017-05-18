@@ -1,6 +1,6 @@
 <zk>
 	<window title="Gera Nota Fiscal" border="normal" id="exemplo"
-		apply="br.com.diego.nf.CIndex">
+		apply="br.com.erik.nf.CIndex">
 		<grid>
 			<columns>
 				<column width="12%" />
@@ -21,6 +21,14 @@
 					</cell>
 					<cell align="left">
 						<decimalbox id="dcmlbxValorFatura"/>
+					</cell>
+				</row>
+				<row>
+					<cell align="rigth">
+						<label value="E-mail Cliente:" />
+					</cell>
+					<cell align="left">
+						<textbox id="txtbxEmailCliente" />
 					</cell>
 				</row>
 				<row>
