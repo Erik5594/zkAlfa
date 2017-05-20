@@ -62,19 +62,25 @@
 	</window>
 	<window title="Notas Fiscais" border="normal" id="exemplo2"
 		apply="br.com.erik.nf.CIndex">
-		<listbox id="listaNotaFiscais" model="@{myList}" mold="paging"
-			pageSize="5" multiple="true" width="800px" rows="${custCount}"
-			forEach="">
+		<listbox id="listaNotaFiscais" mold="paging"
+			pageSize="5" multiple="true" width="800px">
 			<listhead sizable="true">
 				<listheader label="Id" sort="auto(id)" />
 				<listheader label="Valor Impostos" sort="auto(name)" />
 				<listheader label="Valor Bruto" sort="auto(date)" />
 			</listhead>
-			<listitem self="@{each=myList}" id="listItem">
-				<listcell label="@{myList.id}" />
-				<listcell label="@{myList.valorImposto}" />
-				<listcell label="@{myList.valorBruto}" />
-			</listitem>
+		
+				<listitem >
+					<listcell label="id" />
+					<listcell label="valorimposto" />
+					<listcell label="${each.valorBruto}" />
+				</listitem>
+		<listitem >
+					<listcell label="id" />
+					<listcell label="valorimposto" />
+					<listcell label="${each.valorBruto}" />
+				</listitem>
+			
 		</listbox>
 	</window>
 </zk>

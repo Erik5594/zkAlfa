@@ -5,11 +5,13 @@ import java.util.List;
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Decimalbox;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
@@ -27,6 +29,7 @@ public class CIndex extends GenericForwardComposer {
 	private Decimalbox dcmlbxValorFatura;
 	private Radiogroup rdgrpTipoImposto;
 	private Textbox txtbxEmailCliente;
+	@Wire
 	private Listbox listaNotaFiscais;
 
 	public void doAfterCompose(Component comp) throws Exception {
@@ -58,14 +61,21 @@ public class CIndex extends GenericForwardComposer {
 
 		new GeradorNotaFiscal().geraNota(fatura, imposto, emailDestino);		
 		Clients.clearBusy();
-		
+		listaNotaFiscais.getModel().addListDataListener(new NFListDataListener());
 		Messagebox.show("Nota Fiscal gerada com sucesso");
 	}
 	
 	public void onListarNotaFiscal() {
+		System.out.println("Listando as NF");
 		List<NotaFiscal> notasFiscais = new NotaFiscalDao().listar();
-		listaNotaFiscais = new Listbox();
-		listaNotaFiscais.appendItem("teste", "teste2");
+		System.out.println("Quantidade de linhas: " + notasFiscais.size() );
+		for (NotaFiscal nf : notasFiscais)
+		{
+			System.out.print(nf.getId());
+		}
+		if (listaNotaFiscais== null)
+			listaNotaFiscais = new Listbox();
+		listaNotaFiscais.setModel( new ListModelList<NotaFiscal>(notasFiscais));
 		Clients.clearBusy();
 		
 		Messagebox.show("Notas Fiscais listadas com sucesso!");

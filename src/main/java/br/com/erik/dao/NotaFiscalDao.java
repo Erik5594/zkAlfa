@@ -21,8 +21,7 @@ public class NotaFiscalDao extends Dao{
 		List<NotaFiscal> listaNotaFiscal = new ArrayList<NotaFiscal>();
 		try{
 			abrirConexao();
-			listaNotaFiscal = em.createQuery("from NotaFiscal", NotaFiscal.class)
-			.getResultList();
+			listaNotaFiscal = em.createQuery("from NotaFiscal", NotaFiscal.class).getResultList();
 			em.getTransaction().commit();
 		}finally{
 			fecharConexao();
