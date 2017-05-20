@@ -43,6 +43,7 @@ public class CIndex extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		binder = new AnnotateDataBinder(comp);
 		binder.loadAll();
+		atualizarListaNotaFiscal();
 	}
 
 	public void onClick$btnGerarNotaFiscal() {
@@ -66,7 +67,8 @@ public class CIndex extends GenericForwardComposer {
 			imposto = new ICMS();
 		}
 
-		new GeradorNotaFiscal().geraNota(fatura, imposto, emailDestino);		
+		new GeradorNotaFiscal().geraNota(fatura, imposto, emailDestino);	
+		atualizarListaNotaFiscal();
 		Clients.clearBusy();
 		//listaNotaFiscais.getModel().addListDataListener(new NFListDataListener());
 		binder.loadComponent(this.listaNotaFiscais);
@@ -75,12 +77,16 @@ public class CIndex extends GenericForwardComposer {
 	
 	public void onListarNotaFiscal() {
 		LOGGER.info("Listando as NF");
-		listaNotaFiscal = new ArrayList<NotaFiscal>(new NotaFiscalDao().listar());
-		
+		atualizarListaNotaFiscal();
 		
 		Clients.clearBusy();
-		binder.loadComponent(this.listaNotaFiscais);
+		
 		Messagebox.show("Notas Fiscais listadas com sucesso!");
+	}
+
+	private void atualizarListaNotaFiscal() {
+		listaNotaFiscal = new ArrayList<NotaFiscal>(new NotaFiscalDao().listar());
+		binder.loadComponent(this.listaNotaFiscais);
 	}
 
 	public Listbox getListaNotaFiscais() {
