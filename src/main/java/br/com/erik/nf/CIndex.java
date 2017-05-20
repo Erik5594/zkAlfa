@@ -1,5 +1,6 @@
 package br.com.erik.nf;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
@@ -34,6 +35,8 @@ public class CIndex extends GenericForwardComposer {
 	private Textbox txtbxEmailCliente;
 	@Wire
 	private Listbox listaNotaFiscais;
+	
+	private ArrayList<NotaFiscal> listaNotaFiscal = new ArrayList<NotaFiscal>();
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -65,23 +68,36 @@ public class CIndex extends GenericForwardComposer {
 
 		new GeradorNotaFiscal().geraNota(fatura, imposto, emailDestino);		
 		Clients.clearBusy();
-		listaNotaFiscais.getModel().addListDataListener(new NFListDataListener());
+		//listaNotaFiscais.getModel().addListDataListener(new NFListDataListener());
+		binder.loadComponent(this.listaNotaFiscais);
 		Messagebox.show("Nota Fiscal gerada com sucesso");
 	}
 	
 	public void onListarNotaFiscal() {
 		LOGGER.info("Listando as NF");
-		List<NotaFiscal> notasFiscais = new NotaFiscalDao().listar();
-		LOGGER.info("Quantidade de linhas: " + notasFiscais.size() );
-		for (NotaFiscal nf : notasFiscais)
-		{
-			LOGGER.info(nf.getId());
-		}
-		if (listaNotaFiscais== null)
-			listaNotaFiscais = new Listbox();
-		listaNotaFiscais.setModel( new ListModelList<NotaFiscal>(notasFiscais));
-		Clients.clearBusy();
+		listaNotaFiscal = new ArrayList<NotaFiscal>(new NotaFiscalDao().listar());
 		
+		
+		Clients.clearBusy();
+		binder.loadComponent(this.listaNotaFiscais);
 		Messagebox.show("Notas Fiscais listadas com sucesso!");
 	}
+
+	public Listbox getListaNotaFiscais() {
+		return listaNotaFiscais;
+	}
+
+	public void setListaNotaFiscais(Listbox listaNotaFiscais) {
+		this.listaNotaFiscais = listaNotaFiscais;
+	}
+
+	public ArrayList<NotaFiscal> getListaNotaFiscal() {
+		return listaNotaFiscal;
+	}
+
+	public void setListaNotaFiscal(ArrayList<NotaFiscal> listaNotaFiscal) {
+		this.listaNotaFiscal = listaNotaFiscal;
+	}
+	
+	
 }

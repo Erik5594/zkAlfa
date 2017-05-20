@@ -1,10 +1,11 @@
 package br.com.erik.nf;
 
+import org.zkoss.zk.ui.event.GenericEventListener;
+
 import br.com.erik.dao.NotaFiscalDao;
 import br.com.erik.entity.Fatura;
 import br.com.erik.entity.NotaFiscal;
 import br.com.erik.imposto.Imposto;
-import br.com.erik.notificacao.MyException;
 import br.com.erik.notificacao.NotificaEmail;
 import br.com.erik.notificacao.Notificador;
 
@@ -26,6 +27,7 @@ public class GeradorNotaFiscal {
 		double valorImposto = imposto.getValor(fatura.getValor());
 
 		NotaFiscal notaFiscal = new NotaFiscal(valorImposto, fatura.getValor());
+		
 		return notaFiscal;
 	}
 }

@@ -59,28 +59,31 @@
 				</row>
 			</rows>
 		</grid>
-	</window>
-	<window title="Notas Fiscais" border="normal" id="exemplo2"
-		apply="br.com.erik.nf.CIndex">
-		<listbox id="listaNotaFiscais" mold="paging"
-			pageSize="5" multiple="true" width="800px">
-			<listhead sizable="true">
-				<listheader label="Id" sort="auto(id)" />
-				<listheader label="Valor Impostos" sort="auto(name)" />
-				<listheader label="Valor Bruto" sort="auto(date)" />
-			</listhead>
-		
-				<listitem >
-					<listcell label="id" />
-					<listcell label="valorimposto" />
-					<listcell label="${each.valorBruto}" />
-				</listitem>
-		<listitem >
-					<listcell label="id" />
-					<listcell label="valorimposto" />
-					<listcell label="${each.valorBruto}" />
-				</listitem>
+		<grid>		
+			<columns>
+				<column></column>
+			</columns>
 			
-		</listbox>
+			<rows>
+			<row>
+			<listbox id="listaNotaFiscais" mold="paging" model="@{exemplo$composer.listaNotaFiscal}"
+				pageSize="5" multiple="true" width="800px">
+				<listhead sizable="true">
+					<listheader label="Id" sort="auto(id)" />
+					<listheader label="Valor Impostos" sort="auto(name)" />
+					<listheader label="Valor Bruto" sort="auto(date)" />
+				</listhead>
+			
+					<listitem self="@{each=nota }" value="@{nota}">
+						<listcell label="@{nota.id}" />
+						<listcell label="@{nota.valorImposto}" />
+						<listcell label="@{nota.valorBruto}" />
+					</listitem>
+				
+				
+			</listbox>
+			</row>
+			</rows>
+		</grid>
 	</window>
 </zk>
