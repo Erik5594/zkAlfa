@@ -1,10 +1,12 @@
 package br.com.erik.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class NotaFiscal {
@@ -15,6 +17,9 @@ public class NotaFiscal {
 	private double valorImposto;
 	@Column(name="valor_bruto")
 	private double valorBruto;
+	@Transient
+	private double valorTotal;
+	
 	
 	public NotaFiscal() {
 		super();
@@ -48,5 +53,15 @@ public class NotaFiscal {
 	public void setValorBruto(double valorBruto) {
 		this.valorBruto = valorBruto;
 	}
+
+	public double getValorTotal() {
+		return getValorBruto()+ getValorImposto();
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	
+
 
 }

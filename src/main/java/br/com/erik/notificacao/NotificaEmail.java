@@ -7,7 +7,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.jboss.logging.Logger;
-import org.zkoss.util.logging.Log;
+
 
 
 
@@ -18,7 +18,7 @@ public class NotificaEmail extends NotificacaoEmail{
 	private StringBuilder mensagem;
 	private String titulo;
 	
-	private static Logger logger = Logger.getLogger(NotificaEmail.class);
+	private static Logger LOGGER = Logger.getLogger(NotificaEmail.class);
 	
 	public NotificaEmail(final String emailDestino, final NotaFiscal notaFiscal) {
 		this.emailDestino = emailDestino;
@@ -45,8 +45,8 @@ public class NotificaEmail extends NotificacaoEmail{
 
 			Transport.send(message);
 		} catch (Exception e) {
-			logger.error(e.getMessage());
-			//throw new MyException("Erro ao enviar Email: " + e.getMessage());
+			LOGGER.info("Erro ao Enviar Email :" + e.getMessage());
+			
 		} 
 	}
 

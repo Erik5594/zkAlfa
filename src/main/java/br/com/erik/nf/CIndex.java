@@ -2,6 +2,7 @@ package br.com.erik.nf;
 
 import java.util.List;
 
+import org.jboss.logging.Logger;
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
@@ -24,6 +25,8 @@ import br.com.erik.imposto.ISS;
 import br.com.erik.imposto.Imposto;
 
 public class CIndex extends GenericForwardComposer {
+	
+	private static Logger LOGGER = Logger.getLogger(CIndex.class);
 	private DataBinder binder;
 	private Textbox txtbxNomeCliente;
 	private Decimalbox dcmlbxValorFatura;
@@ -32,6 +35,7 @@ public class CIndex extends GenericForwardComposer {
 	@Wire
 	private Listbox listaNotaFiscais;
 
+	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		binder = new AnnotateDataBinder(comp);
@@ -66,12 +70,12 @@ public class CIndex extends GenericForwardComposer {
 	}
 	
 	public void onListarNotaFiscal() {
-		System.out.println("Listando as NF");
+		LOGGER.info("Listando as NF");
 		List<NotaFiscal> notasFiscais = new NotaFiscalDao().listar();
-		System.out.println("Quantidade de linhas: " + notasFiscais.size() );
+		LOGGER.info("Quantidade de linhas: " + notasFiscais.size() );
 		for (NotaFiscal nf : notasFiscais)
 		{
-			System.out.print(nf.getId());
+			LOGGER.info(nf.getId());
 		}
 		if (listaNotaFiscais== null)
 			listaNotaFiscais = new Listbox();
